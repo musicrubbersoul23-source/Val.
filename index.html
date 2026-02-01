@@ -11,27 +11,26 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            /* Raspberry to Peach Gradient */
-            background: linear-gradient(135deg, #b03060 0%, #ffdab9 100%);
+            background: linear-gradient(135deg, #D21F3C 0%, #FFDAB9 100%);
             font-family: sans-serif;
             overflow: hidden;
         }
         .card {
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.45);
             backdrop-filter: blur(15px);
             padding: 30px;
             border-radius: 35px;
             text-align: center;
             width: 85%;
             max-width: 340px;
-            position: relative; /* This is the "Safe Box" boundary */
+            position: relative;
             min-height: 480px;
             border: 1px solid rgba(255,255,255,0.4);
             box-shadow: 0 15px 35px rgba(0,0,0,0.1);
         }
         img { width: 100%; border-radius: 25px; margin-bottom: 20px; }
-        h1 { color: #b03060; font-size: 24px; font-weight: bold; margin-bottom: 40px; }
-        .btn-group { display: flex; justify-content: center; gap: 15px; }
+        h1 { color: #D21F3C; font-size: 24px; font-weight: bold; margin-bottom: 20px; }
+        .btn-group { margin-top: 10px; display: flex; justify-content: center; height: 150px; position: relative; }
         button {
             padding: 12px 30px;
             font-size: 18px;
@@ -40,22 +39,17 @@
             font-weight: bold;
             cursor: pointer;
             touch-action: none;
-        }
-        #yesBtn { background: #b03060; color: white; }
-        #noBtn { 
-            background: #ffdab9; 
-            color: #b03060; 
-            position: absolute; 
-            bottom: 40px; /* Starts at the bottom of the card */
             transition: 0.1s;
         }
+        #yesBtn { background: #D21F3C; color: white; position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); }
+        #noBtn { background: #FFDAB9; color: #D21F3C; position: absolute; }
     </style>
 </head>
 <body>
     <div class="card" id="mainCard">
         <img id="mainImage" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpndW1yZHF4ZzVqbm9pZHF4ZzVqbm9pZHF4ZzVqbm9pZHF4ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif">
         <h1 id="question">Pinkudi, will you be my Valentine?</h1>
-        <div class="btn-group">
+        <div class="btn-group" id="btnGroup">
             <button id="yesBtn" onclick="celebrate()">Yes</button>
             <button id="noBtn" onmouseover="moveButton()" ontouchstart="moveButton()">No</button>
         </div>
@@ -65,13 +59,31 @@
         function moveButton() {
             const card = document.getElementById('mainCard');
             const noBtn = document.getElementById('noBtn');
+            const yesBtn = document.getElementById('yesBtn');
             
-            // This math calculates the exact space inside the white card only
-            const maxX = card.offsetWidth - noBtn.offsetWidth - 20;
-            const maxY = card.offsetHeight - noBtn.offsetHeight - 20;
-            
-            const randomX = Math.floor(Math.random() * maxX);
-            const randomY = Math.floor(Math.random() * maxY);
+            const padding = 20;
+            const yesRect = yesBtn.getBoundingClientRect();
+            const cardRect = card.getBoundingClientRect();
+
+            let randomX, randomY;
+            let isOverlapping = true;
+
+            // This loop keeps trying until it finds a spot NOT touching the Yes button
+            while (isOverlapping) {
+                randomX = Math.floor(Math.random() * (card.offsetWidth - noBtn.offsetWidth - (padding * 2))) + padding;
+                randomY = Math.floor(Math.random() * (card.offsetHeight - noBtn.offsetHeight - (padding * 2))) + padding;
+
+                // Check distance from Yes button
+                const btnCenterX = randomX + (noBtn.offsetWidth / 2);
+                const btnCenterY = randomY + (noBtn.offsetHeight / 2);
+                
+                // Keep "No" at least 100 pixels away from "Yes"
+                const dist = Math.sqrt(Math.pow(randomX - (card.offsetWidth/2 - 40), 2) + Math.pow(randomY - (card.offsetHeight - 60), 2));
+                
+                if (dist > 100) {
+                    isOverlapping = false;
+                }
+            }
             
             noBtn.style.left = randomX + 'px';
             noBtn.style.top = randomY + 'px';
@@ -80,8 +92,7 @@
         function celebrate() {
             document.getElementById('question').innerHTML = "Raspberry & Peach Forever! ❤️";
             document.getElementById('mainImage').src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpndW1yZHF4ZzVqbm9pZHF4ZzVqbm9pZHF4ZzVqbm9pZHF4ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/KztT2c4u8mYYUiMKdJ/giphy.gif";
-            document.getElementById('noBtn').style.display = 'none';
-            document.getElementById('yesBtn').style.display = 'none';
+            document.getElementById('btnGroup').style.display = 'none';
         }
     </script>
 </body>
