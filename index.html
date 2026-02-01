@@ -11,35 +11,39 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: linear-gradient(135deg, #D21F3C 0%, #FFDAB9 100%);
-            font-family: sans-serif;
+            /* High-End Raspberry to Peach Gradient */
+            background: linear-gradient(135deg, #b03060 0%, #ffdab9 100%);
+            font-family: -apple-system, sans-serif;
             overflow: hidden;
         }
         .card {
-            background: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.45);
             backdrop-filter: blur(15px);
             padding: 30px;
-            border-radius: 30px;
+            border-radius: 35px;
             text-align: center;
             width: 85%;
-            max-width: 350px;
-            position: relative; /* Keeps button inside this box */
-            min-height: 400px;
+            max-width: 340px;
+            position: relative; /* This keeps the No button inside this box */
+            min-height: 450px;
+            border: 1px solid rgba(255,255,255,0.4);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
         }
-        img { width: 100%; border-radius: 20px; margin-bottom: 20px; }
-        h1 { color: #D21F3C; font-size: 24px; }
-        .btn-group { margin-top: 30px; display: flex; justify-content: center; gap: 20px; }
+        img { width: 100%; border-radius: 25px; margin-bottom: 20px; }
+        h1 { color: #b03060; font-size: 24px; font-weight: bold; margin-bottom: 40px; }
+        .btn-group { display: flex; justify-content: center; gap: 15px; }
         button {
-            padding: 12px 25px;
+            padding: 12px 30px;
             font-size: 18px;
             border: none;
             border-radius: 50px;
             font-weight: bold;
             cursor: pointer;
             touch-action: none;
+            transition: 0.2s;
         }
-        #yesBtn { background: #D21F3C; color: white; }
-        #noBtn { background: #FFCCAA; color: #D21F3C; position: absolute; transition: 0.2s; }
+        #yesBtn { background: #b03060; color: white; }
+        #noBtn { background: #ffdab9; color: #b03060; position: absolute; }
     </style>
 </head>
 <body>
@@ -57,12 +61,13 @@
             const card = document.getElementById('mainCard');
             const noBtn = document.getElementById('noBtn');
             
-            // This math keeps the button inside the white card only
-            const maxX = card.clientWidth - noBtn.clientWidth;
-            const maxY = card.clientHeight - noBtn.clientHeight;
+            // This math calculates the safe area inside the white card
+            const padding = 20;
+            const maxX = card.offsetWidth - noBtn.offsetWidth - padding;
+            const maxY = card.offsetHeight - noBtn.offsetHeight - padding;
             
-            const randomX = Math.floor(Math.random() * maxX);
-            const randomY = Math.floor(Math.random() * maxY);
+            const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
             
             noBtn.style.left = randomX + 'px';
             noBtn.style.top = randomY + 'px';
@@ -72,6 +77,7 @@
             document.getElementById('question').innerHTML = "Raspberry & Peach Forever! ❤️";
             document.getElementById('mainImage').src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpndW1yZHF4ZzVqbm9pZHF4ZzVqbm9pZHF4ZzVqbm9pZHF4ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/KztT2c4u8mYYUiMKdJ/giphy.gif";
             document.getElementById('noBtn').style.display = 'none';
+            document.getElementById('yesBtn').style.display = 'none';
         }
     </script>
 </body>
