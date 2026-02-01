@@ -11,21 +11,21 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            /* High-End Raspberry to Peach Gradient */
+            /* Raspberry to Peach Gradient */
             background: linear-gradient(135deg, #b03060 0%, #ffdab9 100%);
-            font-family: -apple-system, sans-serif;
+            font-family: sans-serif;
             overflow: hidden;
         }
         .card {
-            background: rgba(255, 255, 255, 0.45);
+            background: rgba(255, 255, 255, 0.5);
             backdrop-filter: blur(15px);
             padding: 30px;
             border-radius: 35px;
             text-align: center;
             width: 85%;
             max-width: 340px;
-            position: relative; /* This keeps the No button inside this box */
-            min-height: 450px;
+            position: relative; /* This is the "Safe Box" boundary */
+            min-height: 480px;
             border: 1px solid rgba(255,255,255,0.4);
             box-shadow: 0 15px 35px rgba(0,0,0,0.1);
         }
@@ -40,10 +40,15 @@
             font-weight: bold;
             cursor: pointer;
             touch-action: none;
-            transition: 0.2s;
         }
         #yesBtn { background: #b03060; color: white; }
-        #noBtn { background: #ffdab9; color: #b03060; position: absolute; }
+        #noBtn { 
+            background: #ffdab9; 
+            color: #b03060; 
+            position: absolute; 
+            bottom: 40px; /* Starts at the bottom of the card */
+            transition: 0.1s;
+        }
     </style>
 </head>
 <body>
@@ -61,13 +66,12 @@
             const card = document.getElementById('mainCard');
             const noBtn = document.getElementById('noBtn');
             
-            // This math calculates the safe area inside the white card
-            const padding = 20;
-            const maxX = card.offsetWidth - noBtn.offsetWidth - padding;
-            const maxY = card.offsetHeight - noBtn.offsetHeight - padding;
+            // This math calculates the exact space inside the white card only
+            const maxX = card.offsetWidth - noBtn.offsetWidth - 20;
+            const maxY = card.offsetHeight - noBtn.offsetHeight - 20;
             
-            const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
-            const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
             
             noBtn.style.left = randomX + 'px';
             noBtn.style.top = randomY + 'px';
