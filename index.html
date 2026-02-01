@@ -11,55 +11,66 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            /* Raspberry to Peach Artistic Gradient */
-            background: linear-gradient(135deg, #e30b5d 0%, #ffccaa 100%);
-            font-family: 'Arial', sans-serif;
+            /* Professional Raspberry to Peach Gradient */
+            background: linear-gradient(135deg, #D21F3C 0%, #FFDAB9 100%);
+            font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif;
             overflow: hidden;
             text-align: center;
         }
         .card {
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(15px);
-            padding: 30px;
-            border-radius: 30px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-            width: 85%;
-            max-width: 350px;
-            border: 1px solid rgba(255,255,255,0.3);
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(20px);
+            padding: 40px;
+            border-radius: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            width: 80%;
+            max-width: 400px;
+            border: 1px solid rgba(255,255,255,0.5);
         }
-        img { width: 180px; border-radius: 20px; margin-bottom: 15px; }
-        h1 { color: white; font-size: 24px; text-shadow: 1px 1px 5px rgba(0,0,0,0.2); }
-        .btn-group { position: relative; height: 120px; margin-top: 20px; }
+        img { width: 220px; border-radius: 25px; margin-bottom: 25px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        h1 { color: #D21F3C; font-size: 28px; font-weight: 800; margin-bottom: 30px; }
+        .btn-group { position: relative; display: flex; justify-content: center; gap: 20px; height: 60px; }
         button {
-            padding: 15px 35px;
+            padding: 15px 40px;
             font-size: 18px;
             border: none;
             border-radius: 50px;
-            cursor: pointer;
             font-weight: bold;
-            transition: transform 0.2s;
-            touch-action: manipulation;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            touch-action: none;
         }
-        #yesBtn { background: #e30b5d; color: white; box-shadow: 0 4px 15px rgba(227,11,93,0.4); }
-        /* The No button is Peach colored */
-        #noBtn { background: #ffccaa; color: #e30b5d; position: absolute; left: 50%; margin-left: -45px; }
+        /* Raspberry Button */
+        #yesBtn { background: #D21F3C; color: white; z-index: 10; }
+        /* Peach Button */
+        #noBtn { background: #FFCCAA; color: #D21F3C; position: absolute; }
     </style>
 </head>
 <body>
-    <div class="card">
-        <img id="mainImage" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp4Zmt6Z3Zxdm51ZzRxeGZ6Z3ZxeGZ6Z3ZxeGZ6Z3ZxeGZ6ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/MDJ9uLGiTLvMo/giphy.gif">
+    <div class="card" id="mainCard">
+        <img id="mainImage" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpndW1yZHF4ZzVqbm9pZHF4ZzVqbm9pZHF4ZzVqbm9pZHF4ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif">
         <h1 id="question">Pinkudi, will you be my Valentine?</h1>
         <div class="btn-group">
             <button id="yesBtn" onclick="celebrate()">Yes</button>
-            <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()" ontouchstart="moveButton()">No</button>
+            <button id="noBtn" onmouseover="moveButton()" ontouchstart="moveButton()">No</button>
         </div>
     </div>
 
     <script>
         function moveButton() {
-            const x = Math.random() * (window.innerWidth - 100);
-            const y = Math.random() * (window.innerHeight - 50);
+            const x = Math.random() * (window.innerWidth - 120);
+            const y = Math.random() * (window.innerHeight - 60);
             const noBtn = document.getElementById('noBtn');
             noBtn.style.position = 'fixed';
-            noBtn
-            
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        }
+        function celebrate() {
+            document.getElementById('question').innerHTML = "Raspberry & Peach Forever! ❤️";
+            /* Celebration GIF */
+            document.getElementById('mainImage').src = "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpndW1yZHF4ZzVqbm9pZHF4ZzVqbm9pZHF4ZzVqbm9pZHF4ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/KztT2c4u8mYYUiMKdJ/giphy.gif";
+            document.querySelector('.btn-group').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
