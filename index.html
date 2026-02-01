@@ -11,44 +11,40 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            /* Professional Raspberry to Peach Gradient */
             background: linear-gradient(135deg, #D21F3C 0%, #FFDAB9 100%);
-            font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: sans-serif;
             overflow: hidden;
-            text-align: center;
         }
         .card {
             background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(20px);
-            padding: 40px;
-            border-radius: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            width: 80%;
-            max-width: 400px;
-            border: 1px solid rgba(255,255,255,0.5);
+            backdrop-filter: blur(15px);
+            padding: 30px;
+            border-radius: 30px;
+            text-align: center;
+            width: 85%;
+            max-width: 350px;
+            position: relative; /* Keeps button inside this box */
+            min-height: 400px;
         }
-        img { width: 220px; border-radius: 25px; margin-bottom: 25px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        h1 { color: #D21F3C; font-size: 28px; font-weight: 800; margin-bottom: 30px; }
-        .btn-group { position: relative; display: flex; justify-content: center; gap: 20px; height: 60px; }
+        img { width: 100%; border-radius: 20px; margin-bottom: 20px; }
+        h1 { color: #D21F3C; font-size: 24px; }
+        .btn-group { margin-top: 30px; display: flex; justify-content: center; gap: 20px; }
         button {
-            padding: 15px 40px;
+            padding: 12px 25px;
             font-size: 18px;
             border: none;
             border-radius: 50px;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.2s ease;
             touch-action: none;
         }
-        /* Raspberry Button */
-        #yesBtn { background: #D21F3C; color: white; z-index: 10; }
-        /* Peach Button */
-        #noBtn { background: #FFCCAA; color: #D21F3C; position: absolute; }
+        #yesBtn { background: #D21F3C; color: white; }
+        #noBtn { background: #FFCCAA; color: #D21F3C; position: absolute; transition: 0.2s; }
     </style>
 </head>
 <body>
     <div class="card" id="mainCard">
-        <img id="mainImage" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpndW1yZHF4ZzVqbm9pZHF4ZzVqbm9pZHF4ZzVqbm9pZHF4ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif">
+        <img id="mainImage" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpndW1yZHF4ZzVqbm9pZHF4ZzVqbm9pZHF4ZzVqbm9pZHF4ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif">
         <h1 id="question">Pinkudi, will you be my Valentine?</h1>
         <div class="btn-group">
             <button id="yesBtn" onclick="celebrate()">Yes</button>
@@ -58,18 +54,24 @@
 
     <script>
         function moveButton() {
-            const x = Math.random() * (window.innerWidth - 120);
-            const y = Math.random() * (window.innerHeight - 60);
+            const card = document.getElementById('mainCard');
             const noBtn = document.getElementById('noBtn');
-            noBtn.style.position = 'fixed';
-            noBtn.style.left = x + 'px';
-            noBtn.style.top = y + 'px';
+            
+            // This math keeps the button inside the white card only
+            const maxX = card.clientWidth - noBtn.clientWidth;
+            const maxY = card.clientHeight - noBtn.clientHeight;
+            
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+            
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
         }
+
         function celebrate() {
             document.getElementById('question').innerHTML = "Raspberry & Peach Forever! ❤️";
-            /* Celebration GIF */
-            document.getElementById('mainImage').src = "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpndW1yZHF4ZzVqbm9pZHF4ZzVqbm9pZHF4ZzVqbm9pZHF4ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/KztT2c4u8mYYUiMKdJ/giphy.gif";
-            document.querySelector('.btn-group').style.display = 'none';
+            document.getElementById('mainImage').src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpndW1yZHF4ZzVqbm9pZHF4ZzVqbm9pZHF4ZzVqbm9pZHF4ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/KztT2c4u8mYYUiMKdJ/giphy.gif";
+            document.getElementById('noBtn').style.display = 'none';
         }
     </script>
 </body>
