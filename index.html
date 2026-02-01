@@ -2,56 +2,56 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>For Pinkudi 🌸</title>
     <style>
         body {
             margin: 0;
-            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* Raspberry to Peach Artistic Gradient */
+            background: linear-gradient(135deg, #e30b5d 0%, #ffccaa 100%);
+            font-family: 'Arial', sans-serif;
             overflow: hidden;
             text-align: center;
         }
         .card {
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            max-width: 400px;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(15px);
+            padding: 30px;
+            border-radius: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            width: 85%;
+            max-width: 350px;
+            border: 1px solid rgba(255,255,255,0.3);
         }
-        img {
-            width: 200px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-        }
-        h1 { color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
-        .btn-group { position: relative; height: 100px; margin-top: 20px; }
+        img { width: 180px; border-radius: 20px; margin-bottom: 15px; }
+        h1 { color: white; font-size: 24px; text-shadow: 1px 1px 5px rgba(0,0,0,0.2); }
+        .btn-group { position: relative; height: 120px; margin-top: 20px; }
         button {
-            padding: 15px 30px;
+            padding: 15px 35px;
             font-size: 18px;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            transition: 0.3s;
             font-weight: bold;
+            transition: transform 0.2s;
+            touch-action: manipulation;
         }
-        #yesBtn { background: #ff4b2b; color: white; margin-right: 10px; }
-        #noBtn { background: #ff9068; color: white; position: absolute; }
+        #yesBtn { background: #e30b5d; color: white; box-shadow: 0 4px 15px rgba(227,11,93,0.4); }
+        /* The No button is Peach colored */
+        #noBtn { background: #ffccaa; color: #e30b5d; position: absolute; left: 50%; margin-left: -45px; }
     </style>
 </head>
 <body>
-    <div class="card" id="mainCard">
+    <div class="card">
         <img id="mainImage" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp4Zmt6Z3Zxdm51ZzRxeGZ6Z3ZxeGZ6Z3ZxeGZ6Z3ZxeGZ6ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/MDJ9uLGiTLvMo/giphy.gif">
         <h1 id="question">Pinkudi, will you be my Valentine?</h1>
         <div class="btn-group">
             <button id="yesBtn" onclick="celebrate()">Yes</button>
-            <button id="noBtn" onmouseover="moveButton()">No</button>
+            <button id="noBtn" onmouseover="moveButton()" onclick="moveButton()" ontouchstart="moveButton()">No</button>
         </div>
     </div>
 
@@ -59,14 +59,7 @@
         function moveButton() {
             const x = Math.random() * (window.innerWidth - 100);
             const y = Math.random() * (window.innerHeight - 50);
-            document.getElementById('noBtn').style.left = x + 'px';
-            document.getElementById('noBtn').style.top = y + 'px';
-        }
-        function celebrate() {
-            document.getElementById('question').innerHTML = "Raspberry & Peach Forever! ❤️";
-            document.getElementById('mainImage').src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp4Zmt6Z3Zxdm51ZzRxeGZ6Z3ZxeGZ6Z3ZxeGZ6Z3ZxeGZ6ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/KztT2c4u8mYYUiMKdJ/giphy.gif";
-            document.querySelector('.btn-group').style.display = 'none';
-        }
-    </script>
-</body>
-</html>
+            const noBtn = document.getElementById('noBtn');
+            noBtn.style.position = 'fixed';
+            noBtn
+            
